@@ -1,0 +1,22 @@
+
+t
+java:S2293>"YReplace the type specification in this constructor call with the diamond operator ("<>").(©ÜŠüÿÿÿÿ
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Î¿ÉÔ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ç¼Í
+X
+java:S2094"BRemove this empty class, write its code or make it an "interface".(Î¿ÉÔ
+V	java:S125"<This block of commented-out lines of code should be removed.(»•ûÿÿÿÿ
+œ
+java:S1186$"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(õ¥Úÿÿÿÿÿ
+œ
+java:S1186%"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÎºÆıÿÿÿÿ
+<
+java:S16594"&Declare "interest" on a separate line.(Ï“Åá
+V	java:S125("<This block of commented-out lines of code should be removed.(ç¦­¤üÿÿÿÿ
+M	java:S106F"9Replace this use of System.out or System.err by a logger.(ÜÄ™g
+S	java:S106H"9Replace this use of System.out or System.err by a logger.(‘Ô¶Œúÿÿÿÿ
+N	java:S106I"9Replace this use of System.out or System.err by a logger.(â¸Æ’
+E
+java:S1128"*Remove this unused import 'chapter9.Duck'.(ßá›Ÿşÿÿÿÿ
+H
+java:S1128"-Remove this unused import 'chapter9.Squirel'.(°£µçúÿÿÿÿ
