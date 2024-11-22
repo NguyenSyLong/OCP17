@@ -1,0 +1,46 @@
+Understanding the Lock Framework
+
+Applying a ReentrantLock
+Mỗi thread gọi lock() trước khi nó đi vào mã bảo vệ và gọi unlock() trước khi nó thoát khỏi mã bảo vệ.
+Lớp ReentrantLock là một monitor đơn giản của Lock interface và hộ trợ loại trừ lẫn nhau.
+
+Giải pháp bằng loại trừ lẫn nhau: Đảm bảo chỉ có 1 luồng truy cập duy nhất tại 1 thời điểm
+ReentrantLoack đảm bải khi 1 luồng đã gọi lock() và lấy được khóa, tất cả các luồng khác gọi lock() sẽ đợi cho đến khi luồng đầu tiên gọi
+unlock()
+Lớp ReentrantLock bao gồm một hàm tạo lấy một boolean duy nhất và đặt tham số “fairness”
+Bên cạnh việc luôn đảm bảo giải phóng khóa, bạn cũng cần đảm bảo rằng bạn chỉ giải phóng khóa mà bạn có. Nếu bạn cố gắng giải phóng khóa mà 
+bạn không có, bạn sẽ nhận được exception khi chạy.
+
+Attempting to Acquire a Lock
+
+tryLock()
+Phương thức tryLock() sẽ cố gắng lấy khóa và ngay lập tức trả về kết quả boolean cho biết khóa đã lấy hay chưa
+Không giống như phương thức lock(), nó không đợi nếu một luồng khác đã giữ khóa. Nó trả về ngay lập tức, bất kể khóa có khả dụng hay không.
+
+tryLock(long,TimeUnit)
+Nếu khóa khả dụng: nó sẽ lập tức trả về true và luồng sẽ giữ khóa
+Nếu khóa không khả dụng: 
+Thay vì ngay lập tức trả về false như tryLock(), nó sẽ đợi 1 khoảng thời gian tối đa theo tham số timeout để xem khóa có được giải phóng ko.
+Nếu khóa được giải phóng trong khoảng thời gian chờ, luồng sẽ giữ khóa và tiếp tục thực hiện.
+
+Nếu hết thời gian chờ mà khóa vẫn không khả dụng, phương thức sẽ trả về false
+
+
+Acquiring the Same Lock Twice
+Số lần gọi unlock() phải bằng với số lần gọi lock() hoặc tryLock().
+Nếu không đảm bảo, khóa sẽ không được giải phóng và dẫn đến deadlock hoặc các hành vi không mong muốn.
+
+
+
+Orchestrating Tasks with a CyclicBarrier
+Khi cần phối hợp nhiều luồng thực hiện các nhiệm vụ phức tạp theo từng giai đoạn. CyclicBarrier cho phép một nhóm các luồng đợi nhau tại một
+điểm chung trước khi cùng tiến đến giai đoạn tiếp theo. Điều này đảm bảo tất cả các luồng hoàn thành công việc hiện tại trước khi bước sang
+giai đoạn mới.
+
+
+
+
+
+
+
+

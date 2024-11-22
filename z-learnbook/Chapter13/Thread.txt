@@ -1,0 +1,47 @@
+Understanding Thread Concurrency
+concurrency là thuộc tính thực thi nhiều threads và processes cùng lúc
+Làm thế nào để hệ thống quyết định những gì sẽ thực thi khi có nhiều luồng hơn CPU? 
+Các hệ điều hành sử dụng thread scheduler để xác định luồng nào hiện đang thực thi
+context switch là quá trình lưu giữ trạng thái hiện tại của luồng và sau đó khôi phục trạng thái của luồng để tiếp tục thực thi
+một luồng có thể làm gián đoạn hoặc thay thế một luồng khác nếu nó có mức độ ưu tiên của luồng cao hơn luồng khác
+A thread priority là một giá trị số được liên kết với một luồng được bộ lập lịch luồng xem xét khi xác định luồng nào hiện đang thực thi
+
+Creating a Thread
+
+Một trong những cách đơn giản nhất để xác định 1 task cho thread là sử dụng Runnable
+Asynchronous là thực hiện luồng không theo tuần tự
+Mặc dù thứ tự thực hiện luồng là không xác định khi các luồng được bắt đầu, thứ tự trong 1 luồng vẫn là tuyến tính. Đặc biệt vòng lặp for
+vẫn được sắp xếp theo thứ tự. Ngoài ra begin luôn sắp xếp trước end
+
+Phương thức start giúp 1 thread mới
+Phương thức run giúp chương trình chạy đồng bộ trên 1 luồng
+
+
+Có 2 cách để tạo 1 thread và tác vụ liên quan
+Cung cấp a Runnable object hoặc biểu thức lamda cho hàm tạo thread
+Tạo 1 class extends Thread va override phương thức run
+
+Distinguishing Thread Types
+A system thread là được tạo bởi JVM và chạy trong nền ứng dụng
+ví dụ garbage collection được quản lý bởi một luồng do JVMM gây ra
+Một luồng daemon là một luồng sẽ không ngăn jvm thoát ra khi chương trình kết thúc thường sử dụng cho các task nền hỗ trợ, ko giữ các chương
+trình được chạy khi các luồng chính kết thúc
+
+Managing a Thread's life cycle
+Có thể truy vấn trạng thái luồng bằng cách gọi getState() trên đối tượng luồng.
+Mỗi luồng được khởi tạo với trạng thái NEW. Ngay sau khi start() được gọi, luồng sẽ được chuyển qua trạng thái RUNNABLE. Nhưng thread có thể
+đang chạy hoặc có thể không. RUNNABLE là chỉ luồng có thể chạy được. Sau khi công việc của thread được hoàn thành hoặc một an uncaught 
+exception được thrown, thì state sẽ thành TERMINATED và không có công việc nào được thực thi nữa
+
+Khi ở trạng thái RUNNABLE, thì thread có thể chuyển qua 1 trong 3 trạng thái mà nó tạm dừng công việc: BLOCKED, WAITING hoặc TIME_WAITING
+
+
+Polling with Sleep
+Polling là quá trình kiểm tra dữ liệu không liên tục tại một khoảng thời gian cố định
+
+Interrupting a Thread
+interrupt() giúp chương trình kết thúc ngay khi công việc hoàn thành, tránh lãng phí thời gian chờ đợi không cần thiết
+InterruptedException là cơ chế Java sử dụng để dừng các luồng đang ngủ hoặc đợi tài nguyên khí có yêu cầu ngắt
+
+  
+

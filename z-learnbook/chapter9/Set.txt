@@ -1,0 +1,72 @@
+Bạn sử dụng set khi không muốn cho phép các mục trùng lặp.
+Có 2 loại là:
+1.HashSet
+Lưu trữ các phần tử trong 1 bảng băm
+Sử dụng phương thức 'hashcode()' của các đối tượng lưu trữ
+Cung cấp thời gian hằng số cho việc thêm và kiểm tra xem 1 phần tử có tồn tại trong sẻ hay không
+Nhược điểm là mất thứ tự các phần tử khi chèn chúng. bạn không quan tâm đến điều này trong một Set, 
+làm cho HashSet trở thành loại set phổ biến nhất.
+
+2.TreeSet
+Lưu trữ các phần tử trong một cấu trúc cây được sắp xếp
+Ưu điểm là set luôn được sắp xếp theo thứ tự
+Nhược điểm là việc thêm và kiểm tra xem một phần tử có tồn tại hay không mất nhiều thời gian so với Hashset
+đặc biệt khi cây lớn hơn
+
+Điểm giống nhau
+Cả 2 không được đồng bộ (non-synchronized).
+Cả 2 đều cài đặt interface Cloneable và Serializable.
+
+Khác nhau:
+HashSet: 
+-sử dụng HashMap nội bộ để lưu trữ các phần tử
+-HashSet sẽ không duy trì thứ tự phần tử nào
+-HashSet hiệu suất tốt hơn
+-Khi thêm hoặc xóa hoặc truy xuất thì có độ phức tạp O(1)
+-HashSet sử dụng các phương thức equals() và hashCode() để so sánh các phần tử 
+và do đó loại bỏ các phần tử có thể trùng lặp.
+TreeSet: 
+-sử dụng TreeMap nội bộ để lưu trữ các phần tử
+-duy trì thứ tự phần tử theo bộ so sánh được cung cấp (Comparator). Nếu không có bộ so sánh cung cấp,
+thì đặt theo thứ tự tăng dần tự nhiên của chúng
+-TreeSet cho hiệu suất của lệnh O(log (n)) cho các thao tác chèn, loại bỏ và truy xuất phần tử.
+TreeSet sử dụng phương pháp compare() hoặc compareTo() để so sánh các phần tử và do đó 
+loại bỏ các phần tử có thể trùng lặp. Nó không sử dụng các phương thức equals () 
+và hashCode () để so sánh các phần tử.
+
+
+
+
+Giống với List thì Set có thể tạo bất biến trong 1 dòng hoặc tạo 1 bản sao của 1 Set hiện có
+
+Sử dụng giao diện Queue và Deque
+-Queue khi phần tử thêm vào và loại vỏ theo thứ tự cụ thể first in first out
+
+Queue có 6 phương thức
+Add to back add, offer
+Read from front element, peek
+Get and Remove from front remove, poll
+
+
+-Deque, thường phát âm là deck, khác với hàng đợi thông thường ở chỗ bạn có thể loại bỏ các phần tử từ cả
+đầu và đuôi
+
+Deque Methods:
+
+addFirst(E e), addLast(E e): Thêm phần tử vào đầu hoặc cuối hàng đợi.
+removeFirst(), removeLast(): Loại bỏ phần tử từ đầu hoặc cuối hàng đợi.
+peekFirst(), peekLast(): Trả về phần tử ở đầu hoặc cuối mà không loại bỏ.
+
+Stack Methods(Sử dụng Deque):
+push(E e): Thêm phần tử vào đỉnh ngăn xếp.
+pop(): Loại bỏ và trả về phần tử ở đỉnh ngăn xếp.
+peek(): Trả về phần tử ở đỉnh ngăn xếp mà không loại bỏ
+
+Note: 
+Tree set yêu cầu các phần tử nó phải thực hiện implement Comparable hoặc phải được cung cấp một Comparator
+để xác định thứ tự các phần tử
+khi so sánh các phần tử ko implement Comparable thì nó sẽ chạy nhưng bị exception
+
+
+
+

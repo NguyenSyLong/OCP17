@@ -1,0 +1,48 @@
+Working with generic
+
+Tạo ra các lớp generic
+Cú pháp để giới thiệu một kiểu tham số hóa là khai báo một tham số kiểu hình thức trong dấu ngoặc nhọn
+
+Quy ước đặt tên chon generic
+Sử dụng chữ cái in hoa đơn đê làm rõ ràng chúng không phải là tên lớp thực sự
+
+E là cho 1 phần tử 
+K cho 1 khóa của Map
+V cho 1 giá trị của Map
+N cho 1 số
+T cho 1 kiểu dữ liệu generics
+S,U,V, v.v cho nhiều kiểu generics
+
+Type Erasure
+
+Chỉ định một kiểu generics cho phép trình biên dịch thực thi việc sử dụng đúng kiểu generics.
+Ví dụ, chỉ định kiểu generics của Crate là Robot giống như thay thế T trong lớp Crate bằng Robot. 
+Tuy nhiên, điều này chỉ xảy ra ở thời điểm biên dịch.
+Ở phía sau, trình biên dịch thay thế tất cả các tham chiếu đến T trong Crate bằng Object. 
+Nói cách khác, sau khi mã được biên dịch, các generics của bạn chỉ là các kiểu Object
+
+Điều này có nghĩa là chỉ có 1 tệp lớp. ko có các bản sao khác nhau cho các kiểu tham số hóa khác nhau.
+Qua trình loại bỏ cú pháp generics khỏi mã của bạn được gọi là type erasure.
+Type erasure cho phép mã của bạn tương thích với các phiên bản cũ hơn của Java k chứa Generics
+
+Trình biên dịch thêm các lần ép kiểu liên quan để mã của bạn hoạt động với lớp loại bỏ này. 
+Ví dụ, bạn nhập mã sau:
+
+Robot r = crate.lookInCrate();
+Trình biên dịch chuyển nó thành mã sau:
+Robot r = (Robot) crate.lookInCrate();
+
+Overloading a Generic Method
+Trong Java, việc nạp chồng phương thức với các tham số kiểu 
+khác nhau của generics gặp phải các vấn đề do type erasure (xóa kiểu)
+Khi biên dịch, thông tin kiểu của generics bị loại bỏ, khiến các phương thức
+có signature giống nhau sau khi xóa kiểu sẽ xung đột
+
+
+
+
+Returning Generic Types
+Tất cả các generics trở thành 
+
+
+

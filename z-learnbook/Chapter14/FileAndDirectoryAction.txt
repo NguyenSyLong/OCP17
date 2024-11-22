@@ -1,0 +1,9 @@
+Making directory
+sử dụng phương thức createDirectory() và createDirectories() từ lớp Files
+createDirectory(Path dir, FileAttribute<?>... attrs) throws IOException
+Tạo ra 1 thư mục, ném ngoại lệ nếu thư lục đã tồn tại hoặc nếu các thư mục cha k tồn tại
+createDirectories(Path dir, FileAttribute<?>... attrs) throws IOException 
+Tạo thư mục cùng với các thư mục cha nếu chúng không tồn tại.
+
+Copying Files
+

@@ -1,0 +1,77 @@
+A symbol link là 1 file đặc biệt trong hệ thống file dùng để làm tham chiếu con trỏ tới tệp hoặc thư mục 
+khác
+
+Creating a File or Path
+Chuẩn bị đối tượng đại diện cho đường dẫn 1 tệp hoặc thư mục cụ thể trên 1 hệ thống tệp, Sử dụng I/O 
+kế thừa, đây là lớp java.io.File, trong khi với NIO.2, nó là interface java.nio.file.Path
+File class hay interface Path không thể đọc ghi dữ liệu trong 1 file
+
+Creating a File 
+Creating a Path
+Path là 1 interface, vì vậy luôn sử dụng phương thức static
+Path và Paths cho phép truyền các phần tử varargs để truyền phần tử đường dẫn bổ sung
+
+Switching between File and Path
+File và Path đều tham chiếu trên đĩa, có thể covert với nhau
+
+Obtaining a Path from the FileSystems Class
+Lớp FileSystems tạo các thể hiện của lớp FileSystem trừu tượng. 
+Cái sau bao gồm các phương thức làm việc trực tiếp với hệ thống tệp
+Cả Paths.get() và Path.of() đều là phím tắt cho phương thức FileSystem này
+
+Reviewing I/O and NIO.2 Relationships
+java.io.File là lớp của I/O truyền thống
+java.nio.file.Files là lớp trợ giúp trong NIO.2, hoạt động trên đối tượng Path chứ k phải java.io.File
+Path: có thể tạo từ interface 'Path' bằng static method of
+
+
+Operating on File and Path
+
+Using Shared Functionality
+Sự khác biệt giữa I/O va NIO.2
+Checked Exception NIO.2 ném nhiều ngoại lệ IOException hơn so với I/O truyền thống.
+Sử dụng Stream: NIO.2 sử dụng Stream và lambda thay cho vòng lặp, giúp xử lý dữ liệu hiệu quả hơn
+
+Đóng Stream
+Khi sử dụng các phương thức dựa trên stream trong NIO.2, bạn cần đảm bảo đóng stream bằng cách sử dụng
+'try-with-resources' để tránh rò rỉ tài nguyên
+
+Handling Methods That Declare IOException
+Nguyên nhân phổ biến ném ra ngoại lệ này:
+Mất kết nối với hệ thống tệp cơ bản
+Tệp hoặc thư mục không tồn tại nhưng ko thể truy cập hay sửa đổi
+Tệp tồn tại nhưng ko thể ghi đè
+Tệp hoặc thư mục cần thiết nhưng không tồn tại
+
+Providing NIO.2 Optional Parameters
+Với exception Files.copy(), Files.move()
+
+Interacting with NIO.2 Paths
+Giống như giá trị các String, các instance Path là bất biến.
+
+Viewing the Path
+Interface 'Path' chứa ba phương thức để truy xuất thông tin cơ bản về biểu diễn đường dẫn. Phương thức toString() trả về một biểu diễn chuỗi của toàn bộ đường dẫn. 
+Trên thực tế, đây là phương thức duy nhất trong interface Path trả về một chuỗi.
+
+Accessing Path Elements
+
+Resolving Paths
+Dùng resolve() để kết hợp các đường dẫn
+Nếu resolve với 1 path absolute thì sẽ bị thay thế còn nếu relative thì nối tiếp vào
+
+Relativizing a Path
+
+Normalizing a Path
+phương thức normailize() cũng cho phép chúng ta so sánh các đường dẫn tương đương
+
+Retrieving the Real File System Path
+toRealPath() giúp kiểm tra đường dẫn có trong hệ thống hay không
+sẽ loại bỏ bất kỳ kí hiệu đường dẫn thừa nào tương tự như normalize(), cũng tương tự như toAbsolutePath()
+ở chỗ nó sẽ nối đường dẫn với thư mục làm việc hiện tại nếu đường dẫn là tương đối
+
+
+
+
+
+
+

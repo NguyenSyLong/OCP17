@@ -1,0 +1,112 @@
+Count
+Khi bạn gọi phương thức count trên một stream vô hạn, phương thức này sẽ duyệt qua từng phần tử trong 
+stream để xác định số lượng. Tuy nhiên ko có điểm kết thức, việc duyệt qua các phần tử không bao giờ hoàn 
+thành
+Min Max
+Các phương thức min() và max() cho phép bạn chuyển 1 bộ so sánh tùy chỉnh và tìm giá trị nhỏ nhất hoặc lớn
+nhất trong luồng hữu hạn sắp xếp thứ tụ trên đó
+Bị treo trên luồng vô hạn
+Finding A value
+
+Phương thức findAny() và findFirst() trả về phần tử của stream nếu không stream là empty
+Nếu stream Empty thì trả về optional empty tương đương
+Nếu stream vô hạn thì vẫn trả về giá trị
+
+Matching
+Lưu ý: Các phương thức trả về giá trị boolean, khác với các phương thức tìm kiếm trả về 1 Optional chứa
+phần tử của stream
+Đối với các stream vô hạn, các phương thức này có thể kết thúc sớm nếu điều kiện đc thỏa mãn, sẽ k kết thúc
+nếu không thõa mãn
+
+lợi ích: kiểm tra điều kiện của stream mà ko cần duyêtj toàn bộ phần tử. Chúng ta có thể tiết kiệm thời gian
+và tài nguyên, đặc biệt là khi tìm thấy sớm
+
+Iterating
+Duyệt trên vô hạn thì không bao giờ kết thúc
+Stream không thể sử dụng foreach truyền thống
+
+Reducing
+Gộp tất cả những phần tử vào 1 object
+
+
+Phương thức peek() trong Java Stream API là một phép toán trung gian rất hữu ích, đặc biệt là để gỡ lỗi, 
+bởi vì nó cho phép bạn thực hiện một thao 
+tác trên từng phần tử của stream mà không thay đổi stream đó
+Peek không thay đổi phần tử
+
+
+Lợi ích của việc sử dụng Streams
+Ngắn gọn: Phương pháp sử dụng streams giảm thiểu mã boilerplate (mã lặp đi lặp lại).
+Dễ đọc: Các thao tác được biểu diễn một cách rõ ràng, tuần tự.
+Phong cách khai báo: Tập trung vào những gì cần làm (lọc, sắp xếp, giới hạn) thay vì cách làm chi tiết.
+
+
+Stream đặc biệt cho số nguyên
+Mapping Stream
+map sang những stream nguyên thủy
+
+Working with Advanced Stream Pipeline Concepts
+
+Stream rất lười biếng nếu bạn khởi tạo nó từ 1 list có 2 phần tử nhưng sau khi khai báo xong thêm 1 phần tử nữa
+nó vẫn hiển thị tổng là 3
+
+25: var cats = new ArrayList<String>();
+26: cats.add("Annie");
+27: cats.add("Ripley");
+28: var stream = cats.stream();
+29: cats.add("KC");
+30: System.out.println(stream.count());
+
+
+Liên kết Stream với Dữ liệu Cơ Bản
+Bạn nghĩ đoạn mã này sẽ in ra cái gì?
+
+
+25: var cats = new ArrayList<String>();
+26: cats.add("Annie");
+27: cats.add("Ripley");
+28: var stream = cats.stream();
+29: cats.add("KC");
+30: System.out.println(stream.count());
+
+Câu trả lời đúng là 3. Các dòng mã từ 25 đến 27 tạo một List với hai phần tử. 
+Dòng 28 yêu cầu tạo một stream từ List đó. 
+Hãy nhớ rằng các stream được đánh giá một cách lười biếng. 
+Điều này có nghĩa là stream không được tạo ra ngay từ dòng 28. 
+Một đối tượng được tạo ra biết nơi tìm kiếm dữ liệu khi nó cần thiết. 
+Trên dòng 29, List được thêm một phần tử mới. Trên dòng 30, pipeline của stream chạy. 
+Trước tiên, nó nhìn vào nguồn và nhìn thấy ba phần tử.
+
+Chaining Optionals
+Optional có thể ràng buộc được 1 cách dễ dàng
+
+Spliterator là 1 công cụ để xử lý collection hoặc luồng. Nó cho phép chia nhỏ tập dữ liệu thành các phần
+nhỏ hơn, tối ưu hóa quá trình xử lý và tận dụng được tính song song trong các tác vụ xử lý dữ liệu lớn
+
+
+Collector groupingBy() cho phép collect() nhóm tất cả các phần tử của stream vào một Map. 
+Hàm này xác định các khóa trong Map. Mỗi giá trị trong Map là một List chứa tất cả các mục khớp với khóa
+đó.
+
+GroupBy(Function)
+GroupBy(Function, Collector)
+GroupBy(Function, Supplier, Collector)
+
+Partitioning là một trường hợp đặc biệt của grouping. Với partitioning, chỉ có 2 nhóm có thể: true hoặc false
+Partitioning giống như chia một danh sách thành 2 phần
+
+Một Collector mapping() cho phép chúng ta đi xuống một cấp và thêm một Collector khác.
+
+Note
+forEachOrdered() sẽ in tất cả các phần tử giống list ban đầu nếu ko filter hay sorted
+count() luôn trả về long. Nếu bạn muốn sử dụng kiểu khác mà ko cast thì sẽ bị lỗi
+khi dùng reduce cần có seed cùng kiểu dữ liệu
+lúc filter, sorted, nếu chọn list ban đầu để in thì vẫn giữ nguyên
+
+
+
+
+
+
+
+

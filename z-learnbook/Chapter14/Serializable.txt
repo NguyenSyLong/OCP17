@@ -1,0 +1,17 @@
+Understanding the Deserialization Creation Process
+khi deserialize 1 đối tượng, constructor của serialized class,  cùng với bất kỳ instance initializers nào
+sẽ ko đc gọi khi object được tạo. Java sẽ gọi constructor không tham số của lớp cha không tuần tự hóa 
+đầu tiên mà nó tìm thấy trong hệ thống phân cấp lớp. Trong ví dụ của chúng ta, điều này sẽ là constructor 
+không tham số của lớp Object
+
+Note:
+Khi một đối tượng được deserialize, constructor và bất kỳ khởi tạo thể hiện nào được xác định 
+trong lớp tuần tự hóa sẽ bị bỏ qua. Java chỉ gọi constructor của lớp cha không tuần tự hóa đầu tiên 
+trong hệ thống phân cấp lớp.
+
+Biến tĩnh (static) không phải là một phần của dữ liệu thể hiện của đối tượng, mà là một phần của lớp. 
+Do đó, chúng không được tuần tự hóa cùng với đối tượng.
+Khi một lớp được tải vào bộ nhớ lần đầu tiên, các biến static của lớp đó được khởi tạo với các giá 
+trị mặc định hoặc các giá trị được gán lần cuối trong quá trình khai báo.
+
+

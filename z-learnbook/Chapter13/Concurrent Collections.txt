@@ -1,0 +1,12 @@
+Understanding Memory Consistency Errors
+
+A memory consistency error xảy ra khi các thread khác nhau trong 1 chương trình có cái nhìn không nhất quán về dữ liệu chung. Điều này xảy 
+ra khi một luồng thực hiện thay đổi trên một biến hoặc tập hợp, nhưng các luồng khác không ngay lập tức nhìn thấy giá trị đã được cập nhật, 
+dẫn đến hành vi không nhất quán.
+
+
+Working with Concurrent Classes
+Lớp đồng bộ (Concurrent): Khi có nhiều luồng sửa đổi đồng thời.
+Phương thức synchronized trong Collections: Khi cần thêm đồng bộ hóa cho bộ sưu tập không đồng bộ.
+
+

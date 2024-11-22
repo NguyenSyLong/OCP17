@@ -1,0 +1,19 @@
+Working with Advanced APIs
+
+Manipulating Input Streams
+Các phương thức mark() và reset() trả về một luồng I/O về vị trí trước đó. Trước khi gọi bất kỳ phương thức nào trong số này, 
+bạn nên gọi phương thức markSupported(), phương thức này sẽ trả về true chỉ khi mark() được hỗ trợ. Phương thức skip() rất đơn 
+giản; nó chỉ đọc dữ liệu từ luồng I/O và bỏ qua nội dung.
+
+Marking Data
+Skipping Data
+
+
+Checking for Symbolic Links
+Retrieving Attributes
+
+
+
+
+
+

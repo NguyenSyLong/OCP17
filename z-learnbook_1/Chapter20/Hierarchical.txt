@@ -1,0 +1,5 @@
+21.1 Characteristics of a Hierarchical File System
+I Hierarchical File Systems
+II Absolute and Relative Paths
+21.2 Creating Path Objects
+I 

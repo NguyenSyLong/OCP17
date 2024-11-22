@@ -1,0 +1,60 @@
+Tổng quan về Map
+Map được sử dụng để lưu trữ các cặp khóa giá trị, mỗi khóa sẽ ánh xạ tới 1 giá trị
+Khóa ko phải duy nhất, nhưng giá trị có thể trùng lặp
+Các triển khai khác nhau của Map cung cấp các tính năng khác nhau  
+(ví dụ: HashMap cho truy cập nhanh, TreeMap cho các khóa được sắp xếp).
+
+Điểm chính mà tất cả các lớp Map có chung là key và value.
+
+Map.of() và Map.copyOf()
+Có một phương thức factory để tạo ra một Map.
+
+So sánh các triển khai map
+HashMap lưu trữ các khóa tỏng bảng băm, điều này có nghĩa là nó sử dụng phương thức 'hashcode()' của các
+khóa để truy xuất hiệu quả hơn
+Lợi ích chính là việc có thêm và truy xuất phần tử theo khóa đều có thời gian thực hiện cố định. Nhược điểm
+là bạn mất đi thứ tự chèn các phần tử. Hầu hết thời gian, bạn không quan tâm đến việc này trong Map
+TreeMap
+lưu trữ các khóa trong một cấu trúc cây đã sắp xếp. Lợi ích chính là các khóa luôn được sắp xếp thứ tự.
+Giống như TreeSet, nhược điểm là việc thêm và kiểm tra khóa mất nhiều thời gian hơn khi cây trở nên lớn hơn.
+
+
+Làm Việc với Các Phương Thức của Map
+Note: Nếu put trùng key sẽ bị replace giá trị sau
+
+merge:
+
+Ko merge null đươc(favorites.merge("Jenny", null, mapper); -> null pointer)
+
+1.Khóa yêu cầu có giá trị null trong map, hàm ánh xạ không được gọi
+Trong trường hợp này, giá trị của khóa sẽ được cập nhật với giá trị tham số mà không gọi hàm ánh xạ.
+
+Map<String, String> favorites = new HashMap<>();
+favorites.put("Jenny", null);
+favorites.merge("Jenny", "Skyride", (v1, v2) -> null);
+System.out.println(favorites); // {Jenny=Skyride}
+
+2.Khóa yêu cầu có giá trị không phải null trong map và hàm ánh xạ trả về null
+Trong trường hợp này, khóa sẽ bị loại bỏ khỏi map.
+
+3. Khóa yêu cầu có giá trị không phải null trong map và hàm ánh xạ trả về giá trị không phải null
+Trong trường hợp này, giá trị của khóa sẽ được cập nhật với kết quả của hàm ánh xạ.
+
+Map<String, String> favorites = new HashMap<>();
+favorites.put("Jenny", "Bus Tour");
+favorites.merge("Jenny", "Skyride", (v1, v2) -> v1.length() > v2.length() ? v1 : v2);
+System.out.println(favorites); // {Jenny=Bus Tour}
+
+4.Khóa yêu cầu không có trong map, hàm ánh xạ không được gọi
+
+Map<String, String> favorites = new HashMap<>();
+favorites.merge("Jenny", "Skyride", (v1, v2) -> null);
+System.out.println(favorites); // {Jenny=Skyride}
+
+5.Khóa yêu cầu không có trong map, hàm ánh xạ đc gọi thì sao
+
+Khi khóa yêu cầu không có trong map và hàm ánh xạ được gọi, 
+thì merge() sẽ sử dụng hàm ánh xạ để tính toán giá trị mới cho khóa đó và thêm vào map.
+
+
+

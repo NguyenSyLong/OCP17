@@ -1,0 +1,13 @@
+Lưu ý khi dùng hàm remove là remove(1 số nguyên thủy) là xóa theo index\
+hàm remove(1 Object) là xóa theo 1 giá trị
+Chuyển đổi List sang 1 mảng
+
+Collections.unmodifiableList trả về 1 view ko thể thay đổi vào danh sách gốc. Chỉ có view này k thay đổi
+nên ko thể thêm/xóa các phẩn tử vào view. Tuy nhiên, danh sách gốc hỗ trợ view này có thể thay đổi. Do đó
+khi bạn thay đổi một phần tử danh sách gốc thì view cũng thay đổi
+Hỗ trợ null
+
+List.of hoặc copyOf cũng trả về 1 view ko thể thay đổi so với danh sách gốc. Nhưng kể cả khi danh sách gốc
+thay đổi thì view này vẫn giữ nguyên ko thay đổi so với lúc ban đầu
+Không hỗ trợ null
+

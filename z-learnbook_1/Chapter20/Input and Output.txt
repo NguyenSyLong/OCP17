@@ -1,0 +1,119 @@
+20.1.input stream cho phép ứng dụng đọc 1 chuỗi data
+output stream cho phép ứng dụng ghi 1 chuỗi data
+
+Byte streams that process bytes as a unit of data
+Character streams that process characters as a unit of data
+
+
+A low-level I/O stream hoạt động trực tiếp trên data src và xử lý data chủ yếu dưới dạng byte
+A high-level I/O stream là được liên kết với luồng cơ bản và cung cấp khả năng bổ sung để xử lý dữ liệu do luồng cơ bản quản
+lý
+
+
+
+20.2.Byte Streams: Input Streams and Output Streams
+Là 2 abtract class (i/o packages) là root của hệ thống phân cấp kế thừa để xử lý đọc ghi dữ liệu dưới dạng byte
+
+I.Hệ thống cấp bậc của InputStream
+InputStream: root
+1.1 ObjectInputStream: Đọc các đối tượng đã được tuần tự hóa (serialization) -->   implement iterf ObjectInput --> extend iterf DataInput
+
+1.2 FileInputStream: Đọc từ file
+
+1.3 FilterInputStream:
+1.3.1 BufferedInputStream: Đọc từ luồng với bộ đệm.
+1.3.2 DataInputStream: Đọc dữ liệu nguyên thủy (primitive) từ luồng --> implement DataInput
+1.3.3 PushbackInputStream: Cho phép đẩy byte trở lại luồng đầu vào.
+
+
+II.Hệ thống cấp bậc của OutputStream
+OutputStream: root
+1.1 ObjectOutputStream: Ghi các đối tượng đã được tuần tự hóa (serialization) -->   implement iterf ObjectOutput --> extend iterf DataOutput
+
+1.2 FileOutputStream: Ghi vào file.
+
+1.3 FilterOutputStream:
+1.3.1 BufferedOutputStream: Ghi vào luồng với bộ đệm.
+1.3.2 DataOutputStream: Ghi dữ liệu nguyên thủy (primitive) vào luồng --> implement DataOutput
+1.3.3 PrintStream: Ghi các biểu diễn văn bản của dữ liệu nguyên thủy.
+
+III. Những hàm cơ bản của InputStream và OutputStream
+read(): đọc byte
+transferTo(): trong Java được sử dụng để chuyển tất cả byte từ InputStream hiện tại sang OutputStream được cung cấp
+
+write(): ghi byte
+
+IV.File Streams
+FileInputStream và FileOutputStream đại diện low-level stream xác định đầu vào và đầu ra byte được kết nối với tệp
+
+V.I/O FilterStream
+I/O filter stream  là high-level I/O stream cung cấp chức năng bổ sung cho luồng cơ bản nó liên kết. Dữ liệu được xử lý bởi FilterStream
+lớp cha: FilterInputStream và FilterOutputStream
+lớp con: 
+
+
+1.BufferedInputStream and BufferedOutputStream 
+Provide bộ đệm để xử lý performance đọc và ghi.
+Khái niệm bộ đệm:  bộ đệm giúp giảm số lần truy cập này bằng cách lưu trữ một lượng lớn dữ liệu vào bộ nhớ tạm thời và sau đó xử lý từ bộ đệm. giúp tăng tốc độ xử lý 
+so với việc đọc hoặc ghi từng byte một.
+
+BufferedInputStream là một lớp bao bọc (wrapper class) cho InputStream, cung cấp khả năng đọc dữ liệu từ một nguồn nhập (input source) với bộ đệm. 
+Khi đọc dữ liệu qua BufferedInputStream, nó sẽ đọc một lượng lớn dữ liệu vào bộ đệm nội bộ trước, từ đó giảm thiểu số lần truy cập đến nguồn nhập chính (chẳng hạn như tệp hoặc mạng).
+Bộ đệm giúp giảm số lần truy cập này bằng cách lưu trữ một lượng lớn dữ liệu vào bộ nhớ tạm thời và sau đó xử lý từ bộ đệm
+
+BufferedOutputStream là một lớp bao bọc cho OutputStream, cung cấp khả năng ghi dữ liệu vào một đích xuất (output destination) với bộ đệm. Khi ghi dữ liệu qua BufferedOutputStream, 
+nó sẽ ghi dữ liệu vào bộ đệm nội bộ trước, và chỉ khi bộ đệm đầy hoặc khi bạn gọi phương thức flush(), dữ liệu mới thực sự được ghi ra đích xuất chính.
+
+
+2.DataInputStream and DataOutputStream
+DataInputStream và DataOutputStream là hai lớp trong Java được sử dụng để đọc và ghi các dữ liệu nguyên thủy (primitive data types) từ và đến các nguồn dữ liệu, 
+chẳng hạn như tệp hoặc luồng (stream). Chúng cung cấp các phương thức tiện lợi để đọc và ghi các loại dữ liệu như int, float, double, boolean, char, byte, 
+và các chuỗi ký tự (String)
+
+VI. Reading and Writing Binary Values
+DataInput and DataOutput cho phép đọc và ghi biểu diễn nhị phân của các giá trị nguyên thủy java
+(boolean, char, byte, short, int, long, float, double)
+
+Method writeX(), readX() , X là kiểu nguyên thủy
+File chứa các binary values được gọi là binary files
+Lớp con: DataOutputStream and DataInputStream
+
+20.3 Character Streams: Readers and Writers
+A character encoding là 1 sơ đồ biểu diễn các character. Java program biểu diễn các giá trị kiểu char bên trong bằng mã hóa kí tự Unicode 16 bit.
+Hỗ trơ việc đọc ghi với các ngôn ngữ quốc tế, khi làm việc với data văn bản thì giúp mã nguồn trở nên dễ đọc và ghi hơn so với bytestream
+
+I Hệ thống cấp bậc
+root: Readers và Writers -> read và write Unicode character
+A reader là input character stream implement Readable và đọc 1 chuỗi ký tự unicode
+a writer là output character stream implement Writer và ghi một chuỗi ký tự unicode
+
+
+Các lớp con
+1. FileReader và FileWriter: Dùng để đọc ghi ký tự từ tệp văn bản.
+2. BufferedReader và BufferedWriter: Dùng để đọc ghi văn bản từ một luồng đầu vào ký tự, có thể đệm các ký tự để cung cấp hiệu suất đọc ghi hiệu quả hơn.
+3. Printwriter: cho phép biểu diễn văn bản của các đối tượng Java và các giá trị nguyên thủy của Java được ghi vào luồng đầu ra hoặc trình ghi cơ bản.
+
+II Method
+read()
+skip(long n): cho phép bỏ qua số ký tự theo chị định
+close(): Giống như luồng byte, luồng ký tự phải được đóng khi không còn cần thiết để giải phóng tài nguyên hệ thống.
+ready(): Khi được gọi, phương thức này trả về true nếu thao tác đọc tiếp theo được đảm bảo không bị chặn. Trả về false không đảm bảo rằng thao tác đọc tiếp theo sẽ bị chặn.
+
+transferTo(Writer out): Đọc tất cả các ký tự từ trình đọc này và ghi các ký tự vào trình ghi được chỉ định theo thứ tự chúng được đọc. Các luồng I/O không bị đóng sau khi thao tác.
+
+write()
+flush(): Đóng luồng đầu ra ký tự sẽ tự động xóa luồng.
+
+III Print Writers
+1.Writing Text Representation of Primitive Values and Objects
+2.Writing Formatted Values
+Cung cấp các phương thức format() và các phương thức tiện lợi printf() để ghi các giá trị được định dạng.
+3.Writing Text Files
+4.Reading Text Files
+5.Using Buffered Writers
+
+
+
+
+
+

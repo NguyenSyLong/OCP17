@@ -1,0 +1,10 @@
+Enum constructor only private.
+Enum có thể implement interface chứ k extend được.
+Phương thức clone() trong enum là final, vì vậy không cho các lớp con ghi đè phương thức này, không thể clone ra bất kì bản sao nào của enum.
+Java sẽ đảm bảo rằng mỗi hằng số trong enum đó là một đối tượng duy nhất và bất biến.
+Hàm toString() có thể override lại nhưng không thể đổi access modifier của chúng (mặc định là public)
+
+
+Nó đã được implement lớp Comparable sẵn rồi (có thể thêm vào colections sắp xếp như SortedSet, TreeSet hoặc là TreeMap), Nó sẽ sắp xếp theo thứ tự ordinal của chúng
+Cả 2 class hoặc enum không để cùng public trong 1 file được
+Trong constructor không được truy cập trường non-final static, có thể implement lớp Serializable

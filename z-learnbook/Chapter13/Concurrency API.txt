@@ -1,0 +1,85 @@
+Introducing the Single-Thread Executor
+Concurrency API bao gồm Executors class có thể sử dụng để tạo các phiên bản của đối tượng ExecutorService.
+
+Submitting Tasks
+execute() lấy 1 phiên bản Runnable và hoàn thành 1 tác vụ không đồng bộ.Hàm là void ko có kiểu trả về
+submit() có thể sử dụng hoàn thành tác vụ đồng bộ, trả về 1 instance Future có thể xác định task đã hoàn thành hay chưa
+
+Waiting for Results
+submit() trả về một phiên bản Future<V> có thể được sử dụng để xác định kết quả này.
+
+Introducing Callable
+Callable tương tự như Runnable ngoại trừ phương thức call() của nó trả về một giá trị và có thể nhảy 1 checked exception
+
+Waiting for All Tasks to Finish
+Trong trường hợp gửi nhiều task tới ExecutorService, có thể bạn muốn đợi tất cả các tác vụ hoàn thành trước khi tiếp tục thực 
+thi các phần khác của chương trình. Có 2 phương pháp:
+
+- Sử dụng get() với mỗi đối tượng Future:
+Bạn có thể gọi phương thức get() trên từng đối tượng Future mà submit() trả về để đợi các kết quả. Tuy nhiên, cách này không cần thiết 
+nếu bạn không cần lấy kết quả từ các tác vụ.
+
+- Sử dụng shutdown() và awaitTermination():
+Nếu bạn không cần kết quả từ các tác vụ và chỉ muốn đảm bảo rằng tất cả các tác vụ đã hoàn thành trước khi chương trình tiếp tục, 
+bạn có thể sử dụng phương thức shutdown() để dừng nhận thêm các tác vụ mới và awaitTermination() để chờ tất cả các tác vụ hiện tại 
+hoàn thành trong một khoảng thời gian nhất định.
+
+awaitTermination(long timeout, TimeUnit unit): Đợi các tác vụ hoàn thành trong khoảng thời gian đã chỉ định. Nếu tất cả các vụ hoàn thành
+trước thời hạn, phương thức trả về true. Nếu hết thời gian chờ mà chưa có task hoàn thành, nó sẽ trả về false.
+
+isTerminated(): Sau khi gọi awaitTermination(), bạn có thể kiểm tra xem tất cả các tác vụ đã hoàn thành hay chưa bằng cách gọi phương thức 
+này. Nó sẽ trả về true nếu tất cả các tác vụ đã kết thúc, hoặc false nếu vẫn còn tác vụ đang chạy
+
+Scheduling Tasks
+ScheduledExecutorService là subinterface của ExecutorService có nhiệm vụ set lịch chạy task.
+Tạo instance của ScheduledExecutorService bằng class Executors
+Sự khác biệt giữa scheduleAtFixedRate() và scheduleWithFixedDelay():
+scheduleAtFixedRate(): Tác vụ sẽ được lên lịch theo chu kỳ cố định, ngay cả khi tác vụ trước chưa hoàn thành. 
+Điều này phù hợp với các tác vụ cần được thực hiện định kỳ ở một thời gian cụ thể, như kiểm tra sức khỏe động vật hàng ngày.
+
+scheduleWithFixedDelay(): Tác vụ chỉ được lên lịch sau khi tác vụ trước đó hoàn thành. Điều này hữu ích cho các tác vụ mà thời gian 
+chính xác không quá quan trọng, chẳng hạn như việc kiểm tra lượng thực phẩm trong quầy salad sau khi đã hoàn thành lần kiểm tra trước.
+
+Lưu ý:
+Nếu thời gian thực thi tác vụ dài hơn khoảng thời gian giữa các lần lặp trong scheduleAtFixedRate(), có thể dẫn đến việc chồng chéo tác 
+vụ và làm cho chương trình bị quá tải.
+
+scheduleWithFixedDelay() đảm bảo rằng một tác vụ chỉ bắt đầu sau khi tác vụ trước đó đã hoàn tất, giúp tránh việc chồng chéo và quá tải 
+tài nguyên.
+
+Cả hai phương thức này đều rất hữu ích cho việc quản lý các tác vụ lặp lại trong lập trình đa luồng.
+
+Increasing Concurrency with Pools
+Một thread pool là một nhóm các luồng đã được khởi tạo sẵn và có thể tái sử dụng để thực hiện các task khác nhau.
+Thay vì tạo 1 luồng mới khi cần, thread pool giúp tiết kiệm tài nguyên và tăng hiệu suất bằng cách tái sử dụng các luồng hiện có
+
+
+Writing Thread-Safe Code
+Thread-safety là đặc tính của một đối tượng đảm bảo thực thi an toàn cho nhiều luồng cùng một lúc.
+Trong Java, giá trị các biến có thể bị lưu trữ trong bộ nhớ đệm cục bộ các luồng (thread cache) thay vì đọc luôn từ bộ nhớ chính
+
+Accessing Data with volatile
+Từ khóa volatile đảm bảo rằng giá trị mới nhất của một biến luôn được đọc từ bộ nhớ chính.
+Với volatile thì không giải quyết được vấn đề đồng bộ hóa. Nhiều luồng vẫn có thể ghi đè lên được
+
+Protecting Data with Atomic Classes
+Atomic là tính chất của một phép toán mà nó được thực hiện như một đơn vị duy nhất, không bị can thiệp bởi các luồng khác
+Phiên bản atomic của toán tử tăng sẽ thực hiện việc đọc và ghi biến như một thao tác duy nhất, không cho phép các luồng khác truy cập biến
+trong khi thao tác này đang diễn ra
+
+Improving Access with synchronized Blocks
+Trong khi các atomic classes rất tốt để bảo vệ một biến đơn lẻ, chúng không hưu ích khi bạn cần thực hiện 1 chuỗi lệnh hoặc gọi 1 phương
+thức.
+Kỹ thuật phổ biến nhất là sử dụng monitor để đồng bộ hóa truy cập. Một monitor, còn gọi là khóa (lock), là một cấu trúc hỗ trợ tính loại trừ
+lẫn nhau, đảm bảo mỗi thời điểm chỉ có nhiều nhất 1 luồng thực thi một đoạn mã nhất định
+
+Việc sử dụng khối synchronized đảm bảo rằng các luồng thực hiện thao tác trên cùng một đối tượng một cách an toàn, không làm mất dữ liệu và 
+đảm bảo tính toàn vẹn khi truy cập tài nguyên chia sẻ.
+
+Synchronizing on Methods
+
+
+
+
+
+

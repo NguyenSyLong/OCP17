@@ -1,0 +1,11 @@
+Identifying Threading Problems
+Vấn đề đa luồng xảy ra khi hai hoặc nhiều luồng tương tác với nhau một cách không mong muốn, dẫn đến các tình huống như treo ứng dụng, xung 
+đột dữ liệu, hoặc lỗi không mong đợi. Mặc dù Concurrency API giúp giảm thiểu các vấn đề này, nhưng không thể loại bỏ hoàn toàn.
+
+Understanding Liveness
+Liveness là khả năng ứng dụng thực thi đúng hạn. Các vấn đề về liveness thường khiến ứng dụng không phản hồi hoặc bị "kẹt" trong trạng thái 
+nào đó. Những vấn đề này thường xảy ra khi luồng (thread) rơi vào trạng thái BLOCKING hoặc WAITING mãi mãi.
+
+Deadlock (Tắc Nghẽn Chết)
+Deadlock xảy ra khi hai hoặc nhiều luồng bị khóa mãi mãi, mỗi luồng đều chờ tài nguyên mà một luồng khác đang giữ. Điều này dẫn đến trạng 
+thái bất động, và các luồng không bao giờ thoát ra được.

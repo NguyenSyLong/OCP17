@@ -1,0 +1,64 @@
+Differences between Interfaces and Abstract Classes
+Abtract class cần khai báo từ khóa abstract cho phương thức trừu tượng, interface thì optional
+Interface mặc định phương thức trừu tượng là public còn abstract class thì tất cả ngoài private
+Declaring Concrete Interface Methods
+
+Writing a default Interface Method
+Một phương thức default được khai bao với từ khóa default và phải có phần thân phương thức. Nó có thể ghi đè bởi một lớp implementing
+Sử dụng default method để tương thích ngược, bạn có thể thêm default tùy ý mà không cần sửa đổi các lớp implement inteface đó. Các lớp sẽ sử dụng hàm ở trong interface nếu không override lại
+
+Default Interface Method Definition Rules
+-Mặc định được khai báo trong chỉ mỗi interface
+-Từ khóa default và phải có phần thân phương thức.
+-Ngầm là public
+-Không thể đánh dấu là abtract, final hoặc static
+-Optional override
+-Nếu class kế thừa 2 hoặc nhiều phương thức default có cùng signature, thì lớp đó phải override lại method
+
+Inheriting Duplicate default Methods
+Nếu class kế thừa 2 hoặc nhiều phương thức default có cùng signature, thì lớp đó phải override lại method mới chạy ko bị lỗi
+
+
+Calling a Hidden default Method
+
+2 hoặc nhiều phương thức default có cùng signature mà bạn muốn chọn 1 cái mà không cần ghi đè thì bạn có thể dùng (Tên interface.super.phương thức)
+ví dụ: Walk.super.getSpeed()
+
+Static Interface Method Definition Rules
+1. static method phải được marked là static va bắt buộc phải có body
+2. nếu static method không có access modifier thì mặc định là public (thoải mái access mod)
+3. ko thể marked là abtract hoặc final
+4. static method không được kế thừa và không thể truy cập được trong một lớp implement interface đấy mà không tham chiếu đến interface name
+
+Giống một phương thức tĩnh trong class không cần truy cập bởi instance và tất nhiên là ko được kế thừa
+
+
+Reusing Code with private Interface Methods
+Phương thức private và private static trong interface sinh ra để giảm sự trùng lặp code. Ví dụ thay vì viết 3, 4 dòng mã giống nhau trong 4 method thì viết 1 hàm private rồi gọi hàm đấy
+
+
+Private Interface Method Definition Rules
+1.bắt buộc marked private và có body
+2.a private static nó có thể được gọi bởi bất kì phương thức nào 
+3.còn private thì không được gọi trong thân phương thức static (only default and non-static)
+
+Calling Abstract Methods
+Default, private and non-static method có thể truy cập phương thức abtract định nghĩa trong interface 
+
+
+Reviewing Interface Members
+Treat abstract, default, and non-static private thuộc về instance của interface.
+Treat static methods and variables thuộc về interface class object.
+All private method được sử dụng only trong interface
+
+
+
+
+
+
+
+
+
+
+
+

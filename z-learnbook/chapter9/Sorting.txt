@@ -1,0 +1,23 @@
+TreeSet và TreeMap sắp xếp theo thứ tự nhiên
+Comparable là interface có 1 phương thức duy nhất là 'compareTo()', cho phép bạn xác định thứ tự tự nhiên
+của các đối tượng
+Giữ nhất quán giữa compareTo() và equals()
+Nếu bạn viết một lớp triển khai Comparable, bạn nên đảm bảo rằng phương thức compareTo() và equals() 
+nhất quán với nhau. 
+Điều này có nghĩa là x.equals(y) phải đúng khi x.compareTo(y) trả về 0 và ngược lại.
+Comparator là interface cho phép bạn xác định thứ tự sắp xếp bên ngoài phương thức CompareTo(). Bạn có thể
+sử dụng lambda hoặc biểu thức method red để định nghĩa comparator (phương thức compare)
+
+So sánh comparable và comparator
+Collections.sort() sử dụng phương thức compareTo() để sắp xếp. 
+Nó yêu cầu các đối tượng được sắp xếp phải triển khai Comparable.
+
+Sử dụng binarySearch()
+phương thức binarySearch() yêu cầu 1 list đã được sắp xếp
+
+
+Sử dụng TreeSet
+yêu cầu các phần tử phải triển khai Comparable hoặc cung cấp Comparator
+
+Sắp xếp một list
+

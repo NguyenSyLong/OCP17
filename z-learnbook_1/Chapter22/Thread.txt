@@ -1,0 +1,82 @@
+Các trạng thái chính của luồng:
+1.NEW:
+Luồng đã được tạo nhưng chưa được bắt đầu (start() chưa được gọi).
+
+2. RUNNABLE:
+Luồng đã sẵn sàng để chạy hoặc đang chạy.
+Gồm hai substate không thể quan sát được:
+READY: Luồng đang chờ CPU để được thực thi.
+RUNNING: Luồng đang thực sự thực thi trên CPU.
+
+3.BLOCKED:
+Luồng bị chặn khi cố gắng lấy khóa (lock) của một đối tượng mà đã bị khóa bởi luồng khác
+
+4.WAITING:
+Luồng chờ vô thời hạn cho một hành động, ví dụ:
+Chờ notify() hoặc notifyAll().
+Chờ hoàn thành của một luồng khác với join().
+
+5.TIMED_WAITING:
+Luồng chờ trong một khoảng thời gian giới hạn, ví dụ:
+sleep().
+join(timeout).
+wait(timeout).
+
+6.TERMINATED:
+Luồng đã kết thúc (method run() hoặc call() hoàn tất).
+
+
+
+
+Thread Priorities trong Java
+Tổng quan về ưu tiên luồng
+Ưu tiên luồng được sử dụng để gợi ý cho bộ lập lịch luồng (thread scheduler) xem luồng nào nên được cấp quyền truy cập CPU trước.
+
+Luồng có ưu tiên cao hơn thường được chọn chạy trước luồng có ưu tiên thấp hơn.
+Không đảm bảo rằng luồng ưu tiên cao sẽ luôn hoàn thành nhanh hơn hoặc được chạy liên tục. Điều này phụ thuộc vào nền tảng hệ điều hành và 
+JVM.
+Hành vi khi sử dụng ưu tiên
+Khi một luồng mới được tạo, ưu tiên của nó thừa hưởng từ luồng cha.
+Bạn có thể thay đổi ưu tiên bằng phương thức setPriority() và lấy giá trị ưu tiên bằng getPriority().
+
+
+
+
+Thread Scheduling in JVM
+1. Lập lịch ưu tiên (Preemptive Scheduling)
+Cơ chế:
+Nếu một luồng có mức ưu tiên cao hơn chuyển sang trạng thái READY, luồng đang chạy sẽ bị tạm dừng (chuyển từ trạng thái RUNNING về READY) 
+để nhường CPU cho luồng ưu tiên cao hơn.
+Khi nào xảy ra:
+Một luồng có ưu tiên cao hơn xuất hiện ở trạng thái READY.
+Lưu ý:
+Dựa vào mức ưu tiên của luồng.
+Hạn chế:
+Hành vi có thể thay đổi tùy theo nền tảng hoặc cách JVM được triển khai.
+
+2. Lập lịch chia thời gian (Time-Sliced Scheduling hay Round-Robin Scheduling)
+Cơ chế:
+Mỗi luồng được cấp một khoảng thời gian cố định để chạy trên CPU. Sau khi hết thời gian, luồng sẽ được chuyển về trạng thái READY và đợi 
+lượt tiếp theo.
+Khi nào xảy ra:
+Dù không có luồng ưu tiên cao hơn, thời gian chạy của luồng hiện tại cũng bị giới hạn.
+Lưu ý:
+Hệ thống sẽ lần lượt phân chia thời gian giữa các luồng.
+
+
+
+
+Quá trình nhận khóa đối tượng (Acquiring the Object Lock)
+Trạng thái của luồng khi sử dụng synchronized:
+
+Một luồng muốn thực thi mã đồng bộ trước tiên phải nhận được khóa của đối tượng liên quan.
+Nếu khóa không khả dụng (đang bị một luồng khác giữ), luồng sẽ:
+Chuyển từ RUNNING sang BLOCKED.
+Được đưa vào entry set (hàng đợi chờ khóa) của đối tượng đó.
+Trạng thái luồng sẽ là Thread.State.BLOCKED.
+Khi khóa khả dụng:
+
+JVM sẽ chọn một luồng từ hàng đợi (theo quyết định của bộ lập lịch).
+Luồng đó sẽ chuyển từ BLOCKED sang READY và chờ đến lượt thực thi.
+
+

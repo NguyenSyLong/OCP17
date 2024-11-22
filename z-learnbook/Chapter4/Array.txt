@@ -1,0 +1,41 @@
+Mảng(array) trong java là một cấu trúc dữ liệu cho phép bạn lưu trữ nhiều giá trị cùng loại trong một khối
+bộ nhớ liên tiếp. Mảng có thể chứa dữ liệu nguyên thủy hoặc đối tượng và kích thước luôn có định
+StringBuilder: Cũng sử dụng một mảng các ký tự, nhưng có thể thay đổi được (mutable). 
+Khi không đủ chỗ để lưu trữ tất cả các ký tự, mảng này sẽ được thay thế bằng một mảng lớn hơn.
+
+Tạo mảng các dữ liệu kiểu nguyên thủy
+Có thể viết 2 loại cú pháp khác nhau
+aa[], []aa
+
+Phương thức equals() trên mảng kiểm tra sự bằng nhau của tham chiếu, không phải nội dung.
+
+Tạo mảng với các biến tham chiếu
+Trong Java, bạn có thể chọn bất kỳ loại nào để làm kiểu của mảng, bao gồm cả các lớp do bạn tự tạo.
+Ép Kiểu Mảng
+Bạn có thể ép kiểu mảng giống như ép kiểu các kiểu dữ liệu khác
+Tạo và truy cập mảng
+Sử dụng vòng lặp với mảng
+
+Sorting
+binarySearch() sử dụng cho mảng đã được sắp xếp -> trả về vị trí index
+(nếu ko sắp xếp thì đưa ra 1 vị trí index ko chính xác)
+
+Comparing
+java cung cấp phương thức để so sánh 2 mảng và xác định mảng nào 'nhỏ hơn'
+compare(x,y)
+số - nghĩa là x<y còn + thì ngược lại
+số 0 nghĩa là 2 mảng bằng nhau
+Nếu 2 mảng trả về cùng giá trị cùng độ dài thì 0
+Nếu tất cả các phần tử giống nhau nhưng mảng thứ hai có phần tử bổ sung, trả về số âm.
+Nếu phần tử đầu tiên khác nhau, so sánh phần tử đó
+
+mismatch()
+Phương thức này của Java giúp xác định vị trí đầu tiên mà hai mảng khác nhau, nếu 2 mảng bằng nhau thì trả
+về -1.Nếu không, nó trả về vị trí số đầu tiên khác
+
+Sử dụng varArg
+
+Ki sử dụng varargs, bạn có thể định nghĩa một phương thức có thể nhận số lượng đối số không cố định
+Khai báo mảng đa chiều
+
+
